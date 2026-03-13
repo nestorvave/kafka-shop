@@ -6,12 +6,14 @@ import { PaymentService } from './domain/payment.service';
 
 import { PAYMENT_REPOSITORY } from './domain/payment.repository';
 import { PaymentsKafkaController } from './infrastructure/kafka/payments.controller';
+import { KafkaProducerService } from './infrastructure/kafka/kafka-producer.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([PaymentTypeormEntity])],
   controllers: [PaymentsKafkaController],
   providers: [
     PaymentService,
+	KafkaProducerService,
     {
       provide: PAYMENT_REPOSITORY,
       useClass: PaymentTypeormRepository,

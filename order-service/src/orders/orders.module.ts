@@ -5,12 +5,14 @@ import { OrderTypeormRepository } from './infrastructure/persistence/order.typeo
 import { OrderService } from './domain/order.service';
 import { OrdersController } from './infrastructure/http/orders.controller';
 import { ORDER_REPOSITORY } from './domain/order.repository';
+import { OrdersKafkaConsumer } from './infrastructure/kafka/orders.kafka.consumer';
 
 @Module({
   imports: [TypeOrmModule.forFeature([OrderTypeormEntity])],
   controllers: [OrdersController],
   providers: [
     OrderService,
+    OrdersKafkaConsumer,
 
     // Aquí le decimos a NestJS:
     // "cuando alguien pida OrderRepository, dale OrderTypeormRepository"
